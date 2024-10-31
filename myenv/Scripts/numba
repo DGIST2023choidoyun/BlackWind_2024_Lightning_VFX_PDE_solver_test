@@ -1,0 +1,8 @@
+#!C:\Users\bnpl3\Desktop\Tobo\BlackWind_2024_Lightning_VFX_PDE_solver_test\myenv\Scripts\python.exe
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, division, absolute_import
+
+from numba.misc.numba_entry import main
+
+if __name__ == "__main__":
+    main()
