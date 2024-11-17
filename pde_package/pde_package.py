@@ -2,6 +2,12 @@ from pde import CartesianGrid, ScalarField, PDE, MemoryStorage
 import numpy as np
 import matplotlib.pyplot as plt
 import pyvista as pv
+import time
+
+start_time = time.time()
+
+def calc_time(start_time):
+    print("t::", time.time() - start_time)
 
 sigma_0 = 1e-14
 epsilon_0 = 8.854 * 1e-12
@@ -19,19 +25,23 @@ kappa = 1/(2*5000)   # 2K = scale height
 
 eq = PDE({"PI": f"1/{tau_c} * laplace(PI) - 100 * (laplace(PI) + 2 * {kappa} * d_dz(PI))"})
 
-grid = CartesianGrid([[-100, 100], [-100, 100], [0, 1000]], shape=[64, 64, 64])
+grid = CartesianGrid([[-100, 100], [-100, 100], [0, 300]], shape=[64, 64, 64])
 
 initial_field = ScalarField.from_expression(grid, f"{V_0} * (1 - exp(-2 * {kappa} * z)) / (1 - exp(-2 * {kappa} * {H})) + ({q_0} * exp(-{kappa} * (z - {z_0})) / (4 * pi * {epsilon_0})) * ((exp(-{kappa} * sqrt((x - {x_0})**2 + (y - {y_0})**2 + (z - {z_0})**2)) / sqrt((x - {x_0})**2 + (y - {y_0})**2 + (z - {z_0})**2)) - (exp(-{kappa} * sqrt((x - {x_0})**2 + (y - {y_0})**2 + (z + {z_0})**2)) / sqrt((x - {x_0})**2 + (y - {y_0})**2 + (z + {z_0})**2)))")
+# initial_field = ScalarField.random_uniform(grid)
 
 storage = MemoryStorage()
 
-result = eq.solve(initial_field, t_range=1.0, dt=0.01)
+result = eq.solve(initial_field, t_range=20.0, dt=2.0)
 
+print(result.data)
+
+calc_time(start_time)
 
 data = result.data  # 결과 스칼라 필드 데이터
 x = np.linspace(-100, 100, grid.shape[0])
 y = np.linspace(-100, 100, grid.shape[1])
-z = np.linspace(0, 1000, grid.shape[2])
+z = np.linspace(0, 100, grid.shape[2])
 
 # 3D grid를 pyvista로 변환
 grid_pv = pv.StructuredGrid(*np.meshgrid(x, y, z, indexing="ij"))

@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\bnpl3\Desktop\Tobo\BlackWind_2024_Lightning_VFX_PDE_solver_test\myenv"
+VIRTUAL_ENV="C:\Users\cdydo\OneDrive\바탕 화면\Mines\DGIST\BlackWind\BlackWind_2024_Lightning_VFX_PDE_solver_test\myenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

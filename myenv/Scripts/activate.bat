@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\bnpl3\Desktop\Tobo\BlackWind_2024_Lightning_VFX_PDE_solver_test\myenv
+set VIRTUAL_ENV=C:\Users\cdydo\OneDrive\바탕 화면\Mines\DGIST\BlackWind\BlackWind_2024_Lightning_VFX_PDE_solver_test\myenv
 
 if not defined PROMPT set PROMPT=$P$G
 
